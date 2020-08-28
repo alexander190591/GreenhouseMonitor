@@ -1,0 +1,24 @@
+
+#define AMOUNT_OF_SENSORS 3
+
+class GHM
+{
+public:
+init();
+private:
+ISensor sensor1;
+ISensor sensor2;
+ISensor sensor3;
+IServer server;
+ISensor sensorArray[AMOUNT_OF_SENSORS];
+}
+
+void GHM::init()
+{
+	server = new Server(sensorArray, AMOUNT_OF_SENSORS);
+}
+
+int main()
+{
+GHM.init();
+}
