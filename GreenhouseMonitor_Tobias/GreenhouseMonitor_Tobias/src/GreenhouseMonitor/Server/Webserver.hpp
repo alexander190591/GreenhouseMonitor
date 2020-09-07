@@ -17,14 +17,17 @@ class Webserver : public IServer
     static void onUpdate();
     static void onConnect();
     static void onNotFound();
+    static WebServer _server;
+    static HTML _html;
+    static String _stringToSend;
+   
 
     private:
-    static String _stringToSend;
+
     String _serverName = "0";
     String _ssid = "0";
     String _password = "0";
     String _hostname = "0";
-    static WebServer *_server;
-    static HTML *_html;
+  
     
 };

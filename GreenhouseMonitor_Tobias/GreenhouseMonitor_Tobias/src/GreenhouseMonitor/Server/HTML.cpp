@@ -16,7 +16,7 @@ String HTML::sendHTML(String stringToSend)
   ptr +="</style>\n";
   ptr +="</head>\n";
   ptr +="<body>\n";
-  ptr +="<h1>GreenhouseMonitor_Tobias</h1>\n";
+  ptr +="<h1>GreenhouseMonitor_Tobiagffgfs</h1>\n";
 
   ptr +="</body>\n";
   ptr +="</html>\n";
