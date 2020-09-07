@@ -2,6 +2,7 @@
 #include <WebServer.h>
 #include <Arduino.h>
 #include "GreenhouseMonitor/GreenhouseMonitor.hpp"
+#include "../src/GreenhouseMonitor/Server/HTML.hpp"
 
 
 
@@ -22,6 +23,7 @@ bool ONBOARD_LED_STATUS = LOW;
 const char* ssid = "FTTH_XB6940";
 const char* password = "CeipgemRoyb5";
 WebServer server(80);
+HTML *testHTML;
 //END HTTP VARIABLE
 
 
@@ -29,7 +31,7 @@ WebServer server(80);
 
 void setup() {
 
-  
+  testHTML = new HTML();
   Serial.begin(SERIAL_BAUDRATE);
   delay(100); //delay because why not??
   pinMode(ONBOARD_LED, OUTPUT);
