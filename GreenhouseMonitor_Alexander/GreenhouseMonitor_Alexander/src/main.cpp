@@ -4,8 +4,8 @@
 #include "Sensors/SoilMoistureSensor/SoilMoistureSensor.hpp"
 #include "Sensors/DummySensor/DummySensor.hpp"
 #include "Sensors/ISensor.hpp"
+#include "../lib/defines.hpp"
 
-#define LED_PIN 2
 #define SERIAL_BAUDRATE 9600
 
 void handle_OnConnect();
@@ -68,7 +68,7 @@ void loop()
 void handle_OnConnect()
 {
   LEDstatus = LOW;
-  Serial.println("GPIO4 Status: OFF | GPIO5 Status: OFF");
+  Serial.println("On Connect: Request received.");
   server.send(200, "text/html", SendHTML(LEDstatus));
 }
 

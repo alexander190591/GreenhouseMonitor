@@ -23,12 +23,12 @@ public:
     String getNameAndData();
 private:
     double readData();
-    double convertToRH(double data);
-    double moistureData = 0.0;
-    String unit = " %";
-    const String name = "Soil moisture sensor";
-    int wetValue = 1558;                    // Set manually in wet water (go figure...). DO NOT TOUCH!
-    int dryValue = 3559;                    // Set manually in dry air. DO NOT TOUCH!
+    double convertToPercentage(double analogValue);
+    double _moistureData = 0.0;
+    String _unit = " %";
+    const String _name = "Soil moisture sensor";
+    int _wetValue = 1558;                    // Set manually in wet water (go figure...). DO NOT TOUCH!
+    int _dryValue = 3559;                    // Set manually in dry air. DO NOT TOUCH!
 };
 
 #endif // __SOILMOISTURESENSOR_H__
