@@ -1,6 +1,7 @@
 #include  <WiFi.h>
 #include <WebServer.h>
 #include <Arduino.h>
+#include "GreenhouseMonitor/GreenhouseMonitor.hpp"
 
 
 
@@ -8,7 +9,6 @@ void handle_OnConnect();
 void handle_onboardLedOn();
 void handle_onboardLedOff();
 void handle_NotFound();
-void handle_test(int test1, int test2);
 String SendHTML(uint8_t led1stat);
 
 #define SERIAL_BAUDRATE 9600 //Used for serial printing to monitor
@@ -52,7 +52,6 @@ void setup() {
   server.on("/onboardled_on", handle_onboardLedOn);
   server.on("/onboardled_off", handle_onboardLedOff);
   server.onNotFound(handle_NotFound);
-  server.on("/ontest",handle_test);
 
   server.begin();
   Serial.println("HTTP server started");  
@@ -100,10 +99,7 @@ void handle_NotFound()
   server.send(404, "text/plain", "Not found");
 }
 
-void handle_test(int test1, int test2)
-{
 
-}
 String SendHTML(uint8_t led1stat){
   String ptr = "<!DOCTYPE html> <html>\n";
   ptr +="<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n";
@@ -119,8 +115,7 @@ String SendHTML(uint8_t led1stat){
   ptr +="</style>\n";
   ptr +="</head>\n";
   ptr +="<body>\n";
-  ptr +="<h1>ESP32 Web Server</h1>\n";
-    ptr +="<h3>Using Station(STA) Mode</h3>\n";
+  ptr +="<h1>GreenhouseMonitor_Tobias</h1>\n";
   
    if(led1stat)
   {ptr +="<p>ONBOARD_LED Status: ON</p><a class=\"button button-off\" href=\"/onboardled_off\">OFF</a>\n";}
