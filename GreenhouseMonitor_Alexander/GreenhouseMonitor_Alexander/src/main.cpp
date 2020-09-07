@@ -1,6 +1,9 @@
 #include <WiFi.h>
 #include <WebServer.h>
 #include <Arduino.h>
+#include "Sensors/SoilMoistureSensor/SoilMoistureSensor.hpp"
+#include "Sensors/DummySensor/DummySensor.hpp"
+#include "Sensors/ISensor.hpp"
 
 #define LED_PIN 2
 #define SERIAL_BAUDRATE 9600
@@ -10,23 +13,30 @@ void handle_NotFound();
 void handle_update();
 String SendHTML(uint8_t ledstatus);
 
+// Server stuff
 const char* ssid = "FTTH_XB6940";       // SSID for router here
 const char* password = "CeipgemRoyb5";  // Password for router here
 WebServer server(80);                   // Port 80 is the default HTTP port.
 
 bool LEDstatus = LOW;
 
+// Sensors
+ISensor* mySoilMoistureSensor;
+
 void setup()
 {
   Serial.begin(SERIAL_BAUDRATE);                   // Serial setup with baud rate.
   delay(100);
+
+  mySoilMoistureSensor = new DummySensor();
 
   pinMode(LED_PIN, OUTPUT);               // Set LED_PIN as output pin.
 
   Serial.print("Connecting to "); Serial.println(ssid);
 
   WiFi.begin(ssid, password);             // Connect to local WiFi network.
-  WiFi.setHostname("GreenhouseMonitor_Alexander");
+  WiFi.setHostname("GreenhouseMonitor-A");
+  Serial.print("Host name: "); Serial.println(WiFi.getHostname());
   
   while (WiFi.status() != WL_CONNECTED)   // While connection is not established;
   {
@@ -67,12 +77,12 @@ void handle_update()
   if(LEDstatus)
   {
     LEDstatus = LOW;
-    Serial.println("LED status: ON");
+    Serial.println(mySoilMoistureSensor->getNameAndData());
   }
   else
   {
     LEDstatus = HIGH;
-    Serial.println("LED status: OFF");
+    Serial.println(mySoilMoistureSensor->getNameAndData());
   }
 
   // String allData;
