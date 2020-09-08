@@ -4,9 +4,9 @@
 /**
  * @file SoilTemperatureSensor.hpp
  * @author Alexander Najbjerg Christensen (alexander190591@gmail.com)
- * @brief The Soil Temperature Sensor is a DS18B20 Digital Temperature Sensor. More info see: 
- *        https://create.arduino.cc/projecthub/TheGadgetBoy/ds18b20-digital-temperature-sensor-and-arduino-9cc806
- * @version 0.1
+ * @brief The Soil Temperature Sensor is a DS18B20 Digital Temperature Sensor.
+ *        More info here: https://randomnerdtutorials.com/esp32-ds18b20-temperature-arduino-ide/
+ * @version 1.0
  * @date 2020-09-08
  * 
  * @copyright Copyright (c) 2020
@@ -26,11 +26,10 @@ public:
     String getNameAndData();
 private:
     double readTemp();
-    //void discoverOneWireDevices();
-    String _unit = "°C";
+    String _unit = " °C";
     const String _name = "Soil temperature sensor";
-    OneWire* _oneWire;
-    DallasTemperature* _tempSensor;
+    OneWire* _oneWire;                                  // Pointer for the OneWire protocol object.
+    DallasTemperature* _tempSensor;                     // Pointer for the DS18B20 protocol translator.
 };
 
  #endif // __SOILTEMPERATURESENSOR_H__

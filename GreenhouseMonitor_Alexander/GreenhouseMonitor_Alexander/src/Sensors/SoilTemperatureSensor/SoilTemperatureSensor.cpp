@@ -1,8 +1,9 @@
 /**
  * @file SoilTemperatureSensor.cpp
  * @author Alexander Najbjerg Christensen (alexander190591@gmail.com)
- * @brief 
- * @version 0.1
+ * @brief Implementation of the Soil temperature sensor class. Temperature sensor is the DS18B20.
+ *        More info here: https://randomnerdtutorials.com/esp32-ds18b20-temperature-arduino-ide/
+ * @version 1.0
  * @date 2020-09-08
  * 
  * @copyright Copyright (c) 2020
@@ -12,30 +13,46 @@
 #include "SoilTemperatureSensor.hpp"
 #include "../../../lib/defines.hpp"                         // For custom pin defenitions on the ESP32
 
-
-
+/**
+ * @brief Construct a new Soil Temperature Sensor:: Soil Temperature Sensor object.
+ *        Sets up the OneWire object to listen to the data-pin connected to the DS18B20 soil temperature sensor.
+ *        Sets up the protocol translating object (made by Dallas Temperature).
+ */
 SoilTemperatureSensor::SoilTemperatureSensor() 
 {
     // Setup
     _oneWire = new OneWire(SOIL_TEMPERATURE_1_PIN);          // Setup a oneWire instance to communicate with any OneWire device.
-    _tempSensor = new DallasTemperature(&(*_oneWire));           // Pass the oneWire reference to Dallas Temperature.
+    _tempSensor = new DallasTemperature(&(*_oneWire));       // Pass the oneWire reference to Dallas Temperature.
 
     _tempSensor->begin();                                    // Start up the Dallas Temperature library.
-
-    // discoverOneWireDevices();                            // For debugging purposes.
 }
 
+/**
+ * @brief Method called to receive the temperature in degrees Celcius as a string.
+ * 
+ * @return String containing the temperature in degrees Celcius.
+ */
 String SoilTemperatureSensor::getData() 
 {
     String data = readTemp() + _unit;
-    return data; // More sensors can be put on same wire. We only have one.
+    return data;
 }
 
+/**
+ * @brief Method called to receive the name of the sensor as a String.
+ * 
+ * @return String containing the name of the sensor.
+ */
 String SoilTemperatureSensor::getName() 
 {
     return _name;
 }
 
+/**
+ * @brief Method called to receive the name of the sensor and temperature measured in degrees Celcius as a String.
+ * 
+ * @return String containing name of the sensor and the temperature measured in degrees Celcius.
+ */
 String SoilTemperatureSensor::getNameAndData() 
 {
     String nameAndData = "";
@@ -45,52 +62,14 @@ String SoilTemperatureSensor::getNameAndData()
     return nameAndData;
 }
 
+/**
+ * @brief Private method used to request the temperature from the temperature sensor and receive the temperature in degrees Celcius as a double.
+ * 
+ * @return double containing the temperature in degrees Celcius.
+ */
 double SoilTemperatureSensor::readTemp() 
 {
-    _tempSensor->requestTemperatures();
-
-    // Serial.print("Temperature read: ");                         // For debugging purposes.
-    // Serial.println(_tempSensor->getTempCByIndex(0));            // For debugging purposes.
+    _tempSensor->requestTemperatures();                     // Method needed to be able to call getTempCByIndex(0).
 
     return _tempSensor->getTempCByIndex(0);
 }
-
-/**
- * @brief discovers connected soil temperature sensors without the DallasTemperature library.
- * 
- */
-// void SoilTemperatureSensor::discoverOneWireDevices() 
-// {
-//     byte i;
-//     byte present = 0;
-//     byte data[12];
-//     byte addr[8];
-    
-//     Serial.print("Looking for 1-Wire devices...\n\r");
-
-//     while(_oneWire->search(addr)) {
-//         Serial.print("\n\rFound \'1-Wire\' device with address:\n\r");
-
-//         for( i = 0; i < 8; i++) {
-//             Serial.print("0x");
-//             if (addr[i] < 16) {
-//                 Serial.print('0');
-//             }
-
-//             Serial.print(addr[i], HEX);
-
-//             if (i < 7) {
-//                 Serial.print(", ");
-//             }
-//         }
-
-//         if ( OneWire::crc8( addr, 7) != addr[7]) 
-//         {
-//             Serial.print("CRC is not valid!\n");
-//             return;
-//         }
-//     }
-//     Serial.print("\n\r\n\rThat's it.\r\n");
-//     _oneWire->reset_search();
-//     return;
-// }
