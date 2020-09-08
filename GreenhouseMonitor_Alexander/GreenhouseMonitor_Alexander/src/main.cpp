@@ -2,6 +2,7 @@
 #include <WebServer.h>
 #include <Arduino.h>
 #include "Sensors/SoilMoistureSensor/SoilMoistureSensor.hpp"
+#include "Sensors/SoilTemperatureSensor/SoilTemperatureSensor.hpp"
 #include "Sensors/DummySensor/DummySensor.hpp"
 #include "Sensors/ISensor.hpp"
 #include "../lib/defines.hpp"
@@ -13,9 +14,14 @@ void handle_NotFound();
 void handle_update();
 String SendHTML(uint8_t ledstatus);
 
-// Server stuff
-const char* ssid = "FTTH_XB6940";       // SSID for router here
-const char* password = "CeipgemRoyb5";  // Password for router here
+// S E R V E R   S T U F F
+// Tobias' crib:
+// const char* ssid = "FTTH_XB6940";       // SSID for router here
+// const char* password = "CeipgemRoyb5";  // Password for router here
+
+// Alexanders crib:
+const char* ssid = "NajbjergNet Stuen"; // SSID for router here
+const char* password = "Esther121292";  // Password for router here
 WebServer server(80);                   // Port 80 is the default HTTP port.
 
 bool LEDstatus = LOW;
@@ -28,7 +34,7 @@ void setup()
   Serial.begin(SERIAL_BAUDRATE);                   // Serial setup with baud rate.
   delay(100);
 
-  mySoilMoistureSensor = new DummySensor();
+  mySoilMoistureSensor = new SoilTemperatureSensor();
 
   pinMode(LED_PIN, OUTPUT);               // Set LED_PIN as output pin.
 

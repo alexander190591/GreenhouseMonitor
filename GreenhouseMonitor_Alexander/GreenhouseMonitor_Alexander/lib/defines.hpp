@@ -19,6 +19,7 @@
 //______Define___________________Pin________Possible functionalites_____________Used for____________________________
 #define SOIL_MOISTURE_1_PIN     34         // Input only. RTC_GPIO4_ADC CH6    Soil Moisture Sensor 1
 #define LED_PIN                 2          // RTC_GPIO12. TOUCH2. ADC2 CH2.    Built in LED pin
+#define SOIL_TEMPERATURE_1_PIN  4          // RTC_GPIO10. TOUCH0. ADC2 CH0.    1-Wire communication
 
 /****************************************************
  *         All unused pins defined below.           *
@@ -38,7 +39,6 @@
 // #define ANALOG_PIN_FUNCTIONALITY 14         // RTC_GPIO16. HSPI CLK. TOUCH6. ADC2 CH6.          Functionality
 // #define ANALOG_PIN_FUNCTIONALITY 12         // RTC_GPIO15. HSPI MISO. TOUCH5. ADC2 CH5.         Functionality
 // #define ANALOG_PIN_FUNCTIONALITY 13         // RTC_GPIO14. HSPI MOSI. TOUCH4. ADC2 CH4.         Functionality
-// #define ANALOG_PIN_FUNCTIONALITY 4          // RTC_GPIO10. TOUCH0. ADC2 CH0.                    Functionality
 // #define ANALOG_PIN_FUNCTIONALITY 15         // RTC_GPIO13. TOUCH3. HSPI CSO. ADC2 CH3.          Functionality
 // #define ANALOG_PIN_FUNCTIONALITY 0          // RTC_GPIO11. TOUCH1. ADC2 CH1.                    Functionality
 
