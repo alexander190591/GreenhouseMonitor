@@ -28,6 +28,7 @@ bool LEDstatus = LOW;
 
 // Sensors
 ISensor* mySoilMoistureSensor;
+ISensor* myDummySensor;
 
 void setup()
 {
@@ -35,6 +36,7 @@ void setup()
   delay(100);
 
   mySoilMoistureSensor = new SoilTemperatureSensor();
+  myDummySensor = new DummySensor();
 
   pinMode(LED_PIN, OUTPUT);               // Set LED_PIN as output pin.
 
@@ -119,6 +121,11 @@ String SendHTML(uint8_t ledstatus)
   ptr +="<body>\n";
   ptr +="<h1>GreenhouseMonitor_Alexander</h1>\n";
   ptr +="<h3>Click the button to get the latest data</h3>\n";
+  ptr += "<h4>";
+  ptr += mySoilMoistureSensor->getNameAndData();
+  ptr += "</h4> \n <h4>";
+  ptr += myDummySensor->getNameAndData();
+  ptr += "</h4> \n";
   ptr +="<h4>LED Status: ";
 
   if(ledstatus)

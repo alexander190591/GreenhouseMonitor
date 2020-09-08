@@ -26,7 +26,7 @@ public:
     String getNameAndData();
 private:
     double readTemp();
-    String _unit = " °C";
+    String _unit = " deg C";
     const String _name = "Soil temperature sensor";
     OneWire* _oneWire;                                  // Pointer for the OneWire protocol object.
     DallasTemperature* _tempSensor;                     // Pointer for the DS18B20 protocol translator.
